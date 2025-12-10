@@ -1,4 +1,4 @@
 <template>
-<h1>Dashboard</h1>
+<h1>mamaw</h1>
 </template>
 

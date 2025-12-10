@@ -1,6 +1,7 @@
 <template>
+  category
   <v-card
-    title="Nutrition"
+    title="Category"
     flat
   >
     <template v-slot:text>
@@ -14,118 +15,50 @@
       ></v-text-field>
     </template>
 
+      <v-select
+  clearable
+  label="Select"
+  :items="category.data"
+  variant="outlined"
+  item-title="category_name"
+  item-value="id"
+  class="mx-4"
+></v-select>
+
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="category.data"
       :search="search"
     ></v-data-table>
   </v-card>
+
+      <v-data-table
+      :headers="headers"
+      :items="inventory.data"
+      :search="search"
+    ></v-data-table>
+
+  <v-select
+  clearable
+  label="Select"
+  :items="category.data"
+  variant="outlined"
+  item-title="category_name"
+  class="mx-4"
+></v-select>
+
 </template>
 <script setup>
-  import { ref } from 'vue'
+  // import { ref } from 'vue'
+  const { data: category } = await useFetch('http://localhost:1337/api/categories');
 
   const search = ref('')
   const headers = [
-    {
-      align: 'start',
-      key: 'name',
-      sortable: false,
-      title: 'Dessert (100g serving)',
-    },
-    { key: 'calories', title: 'Calories' },
-    { key: 'fat', title: 'Fat (g)' },
-    { key: 'carbs', title: 'Carbs (g)' },
-    { key: 'protein', title: 'Protein (g)' },
-    { key: 'iron', title: 'Iron (%)' },
+    { key: 'category_name', title: 'Category Name' },
+    { key: 'description', title: 'Description' },
+    { key: 'category_name2', title: 'Category Name2' },
+    { key: 'description', title: 'Description2' },
+   
   ]
-  const desserts = [
-    {
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6,
-      carbs: 24,
-      protein: 4,
-      iron: 1,
-    },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9,
-      carbs: 37,
-      protein: 4.3,
-      iron: 1,
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16,
-      carbs: 23,
-      protein: 6,
-      iron: 7,
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: 8,
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16,
-      carbs: 49,
-      protein: 3.9,
-      iron: 16,
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-      fat: 0,
-      carbs: 94,
-      protein: 0,
-      iron: 0,
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: 2,
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: 45,
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-      fat: 25,
-      carbs: 51,
-      protein: 4.9,
-      iron: 22,
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-      fat: 26,
-      carbs: 65,
-      protein: 7,
-      iron: 6,
-    },
-  ]
+  
 </script>
-
-<script lang="ts" setup>
-
-</script>
-
-<style>
-
-</style>
